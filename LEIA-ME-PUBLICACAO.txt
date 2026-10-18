@@ -1,0 +1,30 @@
+WaaVE — publicar gratuitamente no GitHub Pages
+================================================
+
+Este pacote está preparado para publicação como site estático no GitHub Pages.
+
+PUBLICAR PELO COMPUTADOR
+1. Entre em https://github.com e faça login (ou crie uma conta gratuita).
+2. Clique no botão + no canto superior direito e escolha New repository.
+3. Dê o nome waave-music e marque Public.
+4. Clique em Create repository.
+5. Na página do repositório, clique em Add file > Upload files.
+6. Envie o arquivo index.html deste pacote e clique em Commit changes.
+7. Abra Settings > Pages.
+8. Em Build and deployment, escolha Deploy from a branch.
+9. Selecione Branch: main e Folder: / (root), depois clique Save.
+10. Aguarde alguns minutos. A página GitHub Pages mostrará o endereço público do site.
+
+O endereço geralmente fica no formato:
+https://SEU-USUARIO.github.io/waave-music/
+
+IMPORTANTE
+- Troque SEU-USUARIO pelo seu nome de usuário real do GitHub.
+- Não é possível publicar no seu perfil sem você entrar na sua conta e confirmar a criação/envio do repositório.
+- O site pode ser aberto no celular e computador depois que o GitHub Pages terminar a publicação.
+- Para adicionar o site à tela inicial do celular, abra o endereço no navegador:
+  * Android/Chrome: menu ⋮ > Adicionar à tela inicial.
+  * iPhone/Safari: Compartilhar > Adicionar à Tela de Início.
+- Esta versão não é um aplicativo APK nativo.
+- As faixas de demonstração usam URLs externas e precisam de internet. Os arquivos de áudio importados são locais ao dispositivo e não são enviados para o site.
+- Favoritas e playlists são salvas no navegador/dispositivo e não sincronizam automaticamente entre aparelhos.

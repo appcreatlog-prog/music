@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050914">
+<title>WaaVE — sua música, sua onda</title>
+<style>
+:root{--bg:#050914;--panel:#0b1220;--panel2:#101b2e;--line:#1b2b45;--blue:#19baff;--blue2:#527bff;--text:#f3f7ff;--muted:#91a2bb;--green:#43e6bd}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% -20%,#102b51 0,transparent 42%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
+button,input{font:inherit}button{cursor:pointer;border:0;color:inherit}.app{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh;padding-bottom:98px}
+.sidebar{background:#070d18;border-right:1px solid var(--line);padding:26px 16px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:28px}
+.logo{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:900;letter-spacing:1px;padding:0 10px}.logo-mark{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--blue),#635bff);display:grid;place-items:center;box-shadow:0 0 24px #19baff55}
+.logo span{color:var(--blue)}.nav-label{font-size:11px;letter-spacing:1.8px;color:#62738d;font-weight:800;padding:0 12px;margin-bottom:7px}.nav{display:grid;gap:5px}.nav button{background:transparent;text-align:left;padding:12px;border-radius:11px;color:var(--muted);display:flex;align-items:center;gap:12px;font-weight:650}.nav button.active,.nav button:hover{background:#12233a;color:#fff}.nav button.active{box-shadow:inset 3px 0 var(--blue)}.side-bottom{margin-top:auto;border:1px solid var(--line);border-radius:16px;padding:14px;background:linear-gradient(145deg,#0e2035,#09111e)}.side-bottom strong{display:block;margin-bottom:6px}.side-bottom p{font-size:12px;color:var(--muted);line-height:1.5;margin:0 0 12px}
+main{min-width:0;padding:26px clamp(16px,3vw,42px) 28px}.topbar{display:flex;align-items:center;gap:14px;margin-bottom:28px}.search{display:flex;align-items:center;gap:10px;max-width:540px;flex:1;background:#0c1728;border:1px solid var(--line);border-radius:14px;padding:12px 15px}.search input{border:0;outline:0;background:transparent;color:white;width:100%;min-width:0}.search input::placeholder{color:#6e8099}.top-actions{margin-left:auto;display:flex;align-items:center;gap:10px}.pill{border:1px solid var(--line);background:#0b1525;border-radius:999px;padding:10px 14px;color:#c9d7ea}.avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#1abaff,#5a5cff);font-weight:900}
+.hero{position:relative;overflow:hidden;min-height:270px;border:1px solid #254e7b;border-radius:24px;padding:32px;display:flex;align-items:center;background:linear-gradient(100deg,#0b2038 0%,#0b2038e8 40%,#09203b88 100%),radial-gradient(circle at 78% 45%,#1dbdff55,transparent 30%),linear-gradient(135deg,#101d44,#06111e);margin-bottom:30px}
+.hero:after{content:"♫";position:absolute;right:7%;top:-50px;font-size:290px;font-weight:900;color:#1cbcff12;transform:rotate(14deg);pointer-events:none}.hero-content{max-width:530px;position:relative;z-index:1}.eyebrow{color:var(--blue);text-transform:uppercase;font-size:11px;font-weight:900;letter-spacing:2px}.hero h1{font-size:clamp(30px,4vw,48px);line-height:1.04;margin:12px 0}.hero p{color:#afc1d8;max-width:430px;line-height:1.6;margin:0 0 20px}.primary{background:linear-gradient(100deg,var(--blue),#3978ff);color:#03101c;font-weight:900;padding:12px 18px;border-radius:12px;box-shadow:0 8px 24px #19baff26}.primary:hover{filter:brightness(1.1)}.secondary{background:#14243a;border:1px solid #284362;border-radius:11px;padding:11px 14px;color:#e7f4ff;font-weight:700}.hero .secondary{margin-left:8px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:24px 0 15px}.section-head h2{margin:0;font-size:20px}.section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}.text-btn{background:transparent;color:var(--blue);font-weight:750;font-size:13px}
+.quick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.quick{display:flex;align-items:center;gap:13px;background:#0b1423;border:1px solid var(--line);border-radius:15px;overflow:hidden;padding:0 13px 0 0;min-width:0;text-align:left}.quick:hover,.track:hover{background:#101e32}.cover{width:66px;height:66px;flex-shrink:0;display:grid;place-items:center;font-size:25px;background:linear-gradient(135deg,#134f7d,#552f93);color:#d9f6ff}.cover.c2{background:linear-gradient(135deg,#094a50,#1d9d9b)}.cover.c3{background:linear-gradient(135deg,#7a351f,#db7950)}.cover.c4{background:linear-gradient(135deg,#292957,#a34f8b)}.cover.c5{background:linear-gradient(135deg,#3a4c18,#9ba83c)}.cover.c6{background:linear-gradient(135deg,#15365b,#207bd2)}.quick strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.quick small{color:var(--muted);display:block;margin-top:5px}
+.track-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:15px}.track{position:relative;min-width:0;background:#0a1220;border:1px solid transparent;border-radius:16px;padding:12px;text-align:left}.track:hover{border-color:#203b5a}.track-art{aspect-ratio:1;border-radius:12px;display:grid;place-items:center;font-size:44px;margin-bottom:12px;box-shadow:inset 0 0 30px #0002}.track strong{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.track small{display:block;color:var(--muted);font-size:12px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.play-float{position:absolute;right:18px;top:calc(12px + 38%);width:42px;height:42px;border-radius:50%;background:var(--blue);color:#00111d;display:grid;place-items:center;opacity:0;transform:translateY(6px);transition:.2s;box-shadow:0 5px 20px #0008}.track:hover .play-float{opacity:1;transform:none}
+.empty{border:1px dashed #29405c;border-radius:16px;padding:28px;text-align:center;color:var(--muted);grid-column:1/-1}.library-panel{background:#0b1423;border:1px solid var(--line);border-radius:18px;overflow:hidden}.track-row{display:grid;grid-template-columns:38px minmax(0,1fr) minmax(80px,1fr) 50px 36px;align-items:center;gap:12px;padding:11px 15px;border-bottom:1px solid #142238}.track-row:last-child{border-bottom:0}.row-num{color:#6e819b;font-size:13px;text-align:center}.row-title{min-width:0}.row-title strong,.row-title small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.row-title strong{font-size:13px}.row-title small,.album{font-size:12px;color:var(--muted)}.row-play,.heart{background:transparent;color:#8ba0bb;padding:7px;border-radius:8px}.row-play:hover,.heart:hover,.heart.liked{color:var(--blue)}.mini-cover{width:38px;height:38px;border-radius:8px;display:grid;place-items:center;float:left;margin-right:10px;background:linear-gradient(135deg,#155e8b,#653f9c)}
+.player{position:fixed;z-index:10;bottom:0;left:0;right:0;min-height:88px;background:#070c16f5;backdrop-filter:blur(18px);border-top:1px solid #20314a;display:grid;grid-template-columns:minmax(180px,1fr) minmax(250px,1.4fr) minmax(140px,1fr);align-items:center;gap:20px;padding:12px 24px}.now-playing{display:flex;align-items:center;gap:12px;min-width:0}.now-cover{width:54px;height:54px;border-radius:10px;background:linear-gradient(135deg,#0d7da9,#5a51bd);display:grid;place-items:center;font-size:24px;flex-shrink:0}.now-text{min-width:0}.now-text strong,.now-text small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.now-text strong{font-size:13px}.now-text small{color:var(--muted);font-size:12px;margin-top:4px}.player-center{display:grid;gap:8px;max-width:520px;width:100%;margin:auto}.controls{display:flex;align-items:center;justify-content:center;gap:18px}.control{background:transparent;color:#a9bbd2;font-size:17px;padding:4px}.control:hover{color:white}.control.main{width:36px;height:36px;border-radius:50%;background:#effaff;color:#06101c;font-size:15px}.progress{display:flex;align-items:center;gap:9px;color:#8092ab;font-size:10px}.progress input{width:100%;accent-color:var(--blue);height:4px}.volume{display:flex;align-items:center;justify-content:flex-end;gap:10px;color:#9eb2cc}.volume input{width:100px;accent-color:var(--blue)}.mobile-nav{display:none}
+.toast{position:fixed;z-index:20;right:20px;bottom:108px;background:#10243a;border:1px solid #24517a;border-radius:12px;padding:12px 16px;box-shadow:0 10px 35px #0008;color:#eaf8ff;display:none}.toast.show{display:block}.file-input{display:none}.page-title{font-size:28px;margin:0 0 6px}.page-sub{color:var(--muted);margin:0 0 24px}.empty-state{text-align:center;padding:55px 20px;color:var(--muted)}.empty-state .big{font-size:42px;margin-bottom:12px}
+@media(max-width:1050px){.track-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.app{grid-template-columns:205px minmax(0,1fr)}.player{grid-template-columns:minmax(150px,1fr) minmax(230px,1.4fr) 120px}.volume input{width:65px}}
+@media(max-width:720px){.app{display:block;padding-bottom:152px}.sidebar{display:none}main{padding:17px 14px 25px}.topbar{margin-bottom:18px;gap:8px}.search{padding:11px}.pill{display:none}.hero{padding:23px 20px;min-height:280px}.hero h1{font-size:34px}.hero:after{right:-8%;top:20px;font-size:190px}.hero .secondary{margin:8px 0 0}.quick-grid{grid-template-columns:1fr 1fr;gap:8px}.quick{gap:8px}.cover{width:49px;height:54px;font-size:20px}.quick strong{font-size:12px}.quick small{font-size:11px}.track-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.track{padding:9px}.track-art{font-size:35px}.section-head h2{font-size:18px}.player{grid-template-columns:1fr auto;gap:8px;padding:9px 13px;min-height:126px}.now-playing{grid-column:1;grid-row:1}.now-cover{width:43px;height:43px}.player-center{grid-column:1/-1;grid-row:2;max-width:none;gap:4px}.controls{gap:22px}.progress{gap:7px}.volume{grid-column:2;grid-row:1}.volume input{display:none}.mobile-nav{display:flex;position:fixed;z-index:9;bottom:126px;left:10px;right:10px;background:#0b1424ed;border:1px solid #20334e;border-radius:15px;justify-content:space-around;padding:8px 4px;backdrop-filter:blur(15px)}.mobile-nav button{background:transparent;color:#8296b2;font-size:10px;display:grid;justify-items:center;gap:3px;padding:4px}.mobile-nav button.active{color:var(--blue)}.track-row{grid-template-columns:28px minmax(0,1fr) 35px 30px;gap:8px;padding:10px}.track-row .album{display:none}.track-row .mini-cover{width:34px;height:34px}.track-row .row-title strong{font-size:12px}.toast{bottom:160px;right:12px;left:12px;text-align:center}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="logo"><div class="logo-mark">≋</div>Waa<span>VE</span></div>
+  <div><div class="nav-label">MENU</div><nav class="nav">
+    <button class="active" data-page="home">⌂ <span>Início</span></button>
+    <button data-page="search">⌕ <span>Buscar músicas</span></button>
+    <button data-page="library">▤ <span>Sua biblioteca</span></button>
+    <button data-page="liked">♡ <span>Favoritas</span></button>
+  </nav></div>
+  <div><div class="nav-label">SUA COLEÇÃO</div><nav class="nav">
+    <button data-page="playlists">♫ <span>Playlists</span></button>
+    <button id="uploadSide">＋ <span>Adicionar músicas</span></button>
+  </nav></div>
+  <div class="side-bottom"><strong>🌊 Sua música. Sua onda.</strong><p>Monte sua biblioteca e curta seus próprios arquivos de áudio.</p><button class="secondary" id="createPlaylist">＋ Nova playlist</button></div>
+</aside>
+<main>
+  <header class="topbar">
+    <div class="search">⌕ <input id="searchInput" placeholder="O que você quer ouvir?" aria-label="Buscar músicas"></div>
+    <div class="top-actions"><button class="pill" id="importTop">＋ Importar áudio</button><div class="avatar">W</div></div>
+  </header>
+  <div id="content"></div>
+</main>
+</div>
+<nav class="mobile-nav">
+  <button class="active" data-page="home"><span style="font-size:20px">⌂</span>Início</button>
+  <button data-page="search"><span style="font-size:20px">⌕</span>Buscar</button>
+  <button data-page="library"><span style="font-size:20px">▤</span>Biblioteca</button>
+  <button data-page="liked"><span style="font-size:20px">♡</span>Favoritas</button>
+</nav>
+<footer class="player">
+  <div class="now-playing"><div class="now-cover" id="nowCover">♫</div><div class="now-text"><strong id="nowTitle">Escolha uma música</strong><small id="nowArtist">Sua próxima onda começa aqui</small></div><button class="heart" id="nowHeart" title="Adicionar às favoritas">♡</button></div>
+  <div class="player-center"><div class="controls">
+    <button class="control" id="shuffle" title="Aleatório">⤨</button><button class="control" id="prev" title="Anterior">|◀</button><button class="control main" id="play" title="Reproduzir">▶</button><button class="control" id="next" title="Próxima">▶|</button><button class="control" id="repeat" title="Repetir">↻</button>
+  </div><div class="progress"><span id="currentTime">0:00</span><input id="seek" type="range" min="0" max="100" value="0"><span id="duration">0:00</span></div></div>
+  <div class="volume">◖<input id="volume" type="range" min="0" max="1" step=".01" value=".8"></div>
+</footer>
+<div class="toast" id="toast"></div>
+<input type="file" id="audioFiles" class="file-input" accept="audio/*" multiple>
+<audio id="audio"></audio>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const palettes=['linear-gradient(135deg,#124d75,#6151a8)','linear-gradient(135deg,#075c5d,#24a9a0)','linear-gradient(135deg,#763b29,#d8754d)','linear-gradient(135deg,#292957,#a34f8b)','linear-gradient(135deg,#3a4c18,#9ba83c)','linear-gradient(135deg,#15365b,#207bd2)','linear-gradient(135deg,#4c1d66,#b34b9b)'];
+const emojis=['♫','☾','◈','✦','☼','♬','∞'];
+let tracks=[
+{id:'demo1',title:'Neon Waves',artist:'WaaVE Sessions',album:'Blue Horizon',duration:'Demo',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',art:0},
+{id:'demo2',title:'Midnight Drive',artist:'WaaVE Sessions',album:'After Hours',duration:'Demo',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',art:3},
+{id:'demo3',title:'Ocean Lights',artist:'WaaVE Sessions',album:'Blue Horizon',duration:'Demo',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',art:1},
+{id:'demo4',title:'Electric Dreams',artist:'WaaVE Sessions',album:'Future Pop',duration:'Demo',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',art:6},
+{id:'demo5',title:'Sunset Frequency',artist:'WaaVE Sessions',album:'Golden Hour',duration:'Demo',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',art:2},
+{id:'demo6',title:'Deep Blue',artist:'WaaVE Sessions',album:'Blue Horizon',duration:'Demo',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3',art:5},
+{id:'demo7',title:'Night Runner',artist:'WaaVE Sessions',album:'After Hours',duration:'Demo',url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3',art:4}
+];
+let liked=new Set(JSON.parse(localStorage.getItem('waave-liked')||'[]')), playlists=JSON.parse(localStorage.getItem('waave-playlists')||'[]'), page='home', current=-1, shuffleOn=false, repeatOn=false, filteredTracks=[];
+const audio=$('#audio');
+function save(){localStorage.setItem('waave-liked',JSON.stringify([...liked]));localStorage.setItem('waave-playlists',JSON.stringify(playlists))}
+function toast(s){const t=$('#toast');t.textContent=s;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function art(t){return `<div class="track-art" style="background:${palettes[t.art%palettes.length]}">${emojis[t.art%emojis.length]}</div>`}
+function playTrack(id){let i=tracks.findIndex(t=>t.id===id);if(i<0)return;current=i;const t=tracks[current];if(t.objectUrl)audio.src=t.objectUrl;else audio.src=t.url;audio.play().then(()=>{$('#play').textContent='Ⅱ'}).catch(()=>{toast('Não foi possível tocar. Verifique sua conexão ou importe um arquivo de áudio.');$('#play').textContent='▶'});$('#nowTitle').textContent=t.title;$('#nowArtist').textContent=t.artist;$('#nowCover').style.background=palettes[t.art%palettes.length];$('#nowCover').textContent=emojis[t.art%emojis.length];$('#nowHeart').textContent=liked.has(t.id)?'♥':'♡';$('#nowHeart').classList.toggle('liked',liked.has(t.id));renderContent()}
+function togglePlay(){if(current<0){playTrack(tracks[0].id);return}if(audio.paused){audio.play().then(()=>$('#play').textContent='Ⅱ').catch(()=>toast('Não foi possível tocar esta faixa.'))}else{audio.pause();$('#play').textContent='▶'}}
+function nextTrack(dir=1){if(!tracks.length)return;let n;if(shuffleOn)n=Math.floor(Math.random()*tracks.length);else n=(Math.max(current,0)+dir+tracks.length)%tracks.length;playTrack(tracks[n].id)}
+function toggleLike(id){if(liked.has(id))liked.delete(id);else liked.add(id);save();if(current>=0)$('#nowHeart').textContent=liked.has(tracks[current].id)?'♥':'♡';renderContent()}
+function trackCard(t){return `<button class="track" data-play="${esc(t.id)}">${art(t)}<span class="play-float">▶</span><strong>${esc(t.title)}</strong><small>${esc(t.artist)}</small></button>`}
+function quickCard(t){return `<button class="quick" data-play="${esc(t.id)}"><div class="cover c${t.art%6+1}">${emojis[t.art%emojis.length]}</div><div style="min-width:0"><strong>${esc(t.title)}</strong><small>${esc(t.artist)}</small></div></button>`}
+function row(t,i){return `<div class="track-row"><div class="row-num">${i+1}</div><div class="row-title"><div class="mini-cover" style="background:${palettes[t.art%palettes.length]}">${emojis[t.art%emojis.length]}</div><strong>${esc(t.title)}</strong><small>${esc(t.artist)}</small></div><div class="album">${esc(t.album||'Arquivos locais')}</div><div class="album">${t.duration||'—'}</div><button class="heart ${liked.has(t.id)?'liked':''}" data-like="${esc(t.id)}" title="Favoritar">${liked.has(t.id)?'♥':'♡'}</button><button class="row-play" data-play="${esc(t.id)}" title="Tocar">▶</button></div>`}
+function rows(arr){return `<div class="library-panel">${arr.length?arr.map(row).join(''):`<div class="empty">Nenhuma música por aqui ainda. Importe seus arquivos de áudio para começar.</div>`}</div>`}
+function section(title,sub,body,action=''){return `<div class="section-head"><div><h2>${title}</h2><p>${sub}</p></div>${action}</div>${body}`}
+function renderContent(){
+const q=$('#searchInput').value.trim().toLowerCase();let list=tracks.filter(t=>(t.title+' '+t.artist+' '+(t.album||'')).toLowerCase().includes(q));
+let c='';
+if(page==='home'){
+c=`<section class="hero"><div class="hero-content"><div class="eyebrow">SINTA A FREQUÊNCIA</div><h1>Sua música.<br>Sua onda.</h1><p>Descubra novas vibes, crie sua biblioteca e deixe o WaaVE acompanhar cada momento do seu dia.</p><button class="primary" id="heroPlay">▶ &nbsp; Ouvir agora</button><button class="secondary" id="heroImport">＋ Importar músicas</button></div></section>`;
+c+=section('Continue no seu ritmo','Acesso rápido às suas vibes',`<div class="quick-grid">${tracks.slice(0,4).map(quickCard).join('')}</div>`);
+c+=section('Feito para sua frequência','Mixes para entrar no clima',`<div class="track-grid">${tracks.slice(0,5).map(trackCard).join('')}</div>`);
+c+=section('Sua biblioteca','Músicas adicionadas neste dispositivo',`<div class="library-panel">${tracks.filter(t=>t.local).length?tracks.filter(t=>t.local).slice(0,4).map(row).join(''):`<div class="empty">Suas músicas locais aparecerão aqui depois de importadas.</div>`}</div>`);
+}else if(page==='search'){
+c=`<h1 class="page-title">Buscar</h1><p class="page-sub">Encontre uma faixa na sua biblioteca ou importe seus próprios áudios.</p>`;
+c+=section(q?'Resultados da busca':'Sugestões para você',q?`Resultados para “${esc($('#searchInput').value)}”`:'Explore as faixas de demonstração',`<div class="track-grid">${(q?list:tracks).map(trackCard).join('')||'<div class="empty">Nenhum resultado encontrado. Experimente outro termo ou importe um áudio.</div>'}</div>`);
+c+=`<div style="margin-top:22px"><button class="primary" id="searchImport">＋ Importar arquivos de áudio</button></div>`;
+}else if(page==='library'){
+c=`<h1 class="page-title">Sua biblioteca</h1><p class="page-sub">Tudo o que você adicionou ao WaaVE neste dispositivo.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px"><button class="primary" id="libraryImport">＋ Adicionar músicas</button><button class="secondary" id="makePlaylist">＋ Criar playlist</button></div>`;
+c+=section('Todas as músicas',`${tracks.length} faixas disponíveis`,rows(list));
+}else if(page==='liked'){
+let arr=list.filter(t=>liked.has(t.id));c=`<h1 class="page-title">♡ Favoritas</h1><p class="page-sub">As músicas que você guardou para ouvir de novo.</p>`+rows(arr);
+}else if(page==='playlists'){
+c=`<h1 class="page-title">Playlists</h1><p class="page-sub">Crie coleções para cada momento.</p><button class="primary" id="newPlaylist">＋ Nova playlist</button><div class="track-grid" style="margin-top:22px">`;
+c+=playlists.map((p,i)=>`<button class="track" data-playlist="${i}"><div class="track-art" style="background:${palettes[i%palettes.length]}">♫</div><strong>${esc(p.name)}</strong><small>${p.ids.length} músicas</small></button>`).join('')||'<div class="empty">Você ainda não criou playlists.</div>';c+='</div><div id="playlistDetails"></div>';
+}
+$('#content').innerHTML=c;
+$$('[data-play]').forEach(b=>b.addEventListener('click',()=>playTrack(b.dataset.play)));
+$$('[data-like]').forEach(b=>b.addEventListener('click',()=>toggleLike(b.dataset.like)));
+$('#heroPlay')?.addEventListener('click',()=>playTrack(tracks[0].id));['heroImport','searchImport','libraryImport'].forEach(id=>$('#'+id)?.addEventListener('click',()=>$('#audioFiles').click()));
+['makePlaylist','newPlaylist'].forEach(id=>$('#'+id)?.addEventListener('click',createPlaylist));
+$$('[data-playlist]').forEach(b=>b.addEventListener('click',()=>showPlaylist(Number(b.dataset.playlist))));
+}
+function setPage(p){page=p;$$('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===p));renderContent();window.scrollTo({top:0,behavior:'smooth'})}
+$$('[data-page]').forEach(b=>b.addEventListener('click',()=>setPage(b.dataset.page)));
+$('#searchInput').addEventListener('input',()=>{if(page!=='search'&&$('#searchInput').value.trim())setPage('search');else renderContent()});
+function importFiles(files){let added=0;[...files].filter(f=>f.type.startsWith('audio/')).forEach(f=>{const url=URL.createObjectURL(f);tracks.push({id:'local-'+Date.now()+'-'+Math.random().toString(16).slice(2),title:f.name.replace(/\.[^.]+$/,''),artist:'Arquivo local',album:'Minhas músicas',duration:'—',url,objectUrl:url,local:true,art:Math.floor(Math.random()*palettes.length)});added++});if(added){toast(`${added} arquivo(s) adicionado(s) à biblioteca.`);setPage('library')}else toast('Selecione arquivos de áudio válidos.')}
+$('#audioFiles').addEventListener('change',e=>{importFiles(e.target.files);e.target.value=''});
+$('#importTop').addEventListener('click',()=>$('#audioFiles').click());$('#uploadSide').addEventListener('click',()=>$('#audioFiles').click());
+function createPlaylist(){let name=prompt('Qual será o nome da playlist?');if(!name||!name.trim())return;playlists.push({name:name.trim(),ids:[]});save();toast('Playlist criada!');setPage('playlists')}
+$('#createPlaylist').addEventListener('click',createPlaylist);
+function showPlaylist(i){const p=playlists[i];if(!p)return;const found=p.ids.map(id=>tracks.find(t=>t.id===id)).filter(Boolean);$('#playlistDetails').innerHTML=`<div class="section-head"><div><h2>${esc(p.name)}</h2><p>${found.length} músicas</p></div><button class="secondary" id="addToPlaylist">＋ Adicionar faixa</button></div>${rows(found)}<button class="text-btn" id="deletePlaylist" style="margin-top:12px">Excluir playlist</button>`;$('#addToPlaylist').onclick=()=>{if(!tracks.length)return;let choices=tracks.map((t,n)=>`${n+1}. ${t.title} — ${t.artist}`).join('\n');let val=prompt('Digite o número da música para adicionar:\n'+choices);let n=Number(val)-1;if(Number.isInteger(n)&&tracks[n]){if(!p.ids.includes(tracks[n].id))p.ids.push(tracks[n].id);save();showPlaylist(i);toast('Música adicionada à playlist.')}};$('#deletePlaylist').onclick=()=>{if(confirm('Excluir esta playlist?')){playlists.splice(i,1);save();renderContent()}};$$('#playlistDetails [data-play]').forEach(b=>b.onclick=()=>playTrack(b.dataset.play))}
+$('#play').addEventListener('click',togglePlay);$('#prev').addEventListener('click',()=>nextTrack(-1));$('#next').addEventListener('click',()=>nextTrack(1));
+$('#shuffle').addEventListener('click',()=>{shuffleOn=!shuffleOn;$('#shuffle').style.color=shuffleOn?'var(--blue)':'';toast(shuffleOn?'Modo aleatório ativado':'Modo aleatório desativado')});
+$('#repeat').addEventListener('click',()=>{repeatOn=!repeatOn;audio.loop=repeatOn;$('#repeat').style.color=repeatOn?'var(--blue)':'';toast(repeatOn?'Repetição ativada':'Repetição desativada')});
+$('#nowHeart').addEventListener('click',()=>{if(current>=0)toggleLike(tracks[current].id)});
+$('#volume').addEventListener('input',e=>audio.volume=Number(e.target.value));audio.volume=.8;
+audio.addEventListener('play',()=>$('#play').textContent='Ⅱ');audio.addEventListener('pause',()=>$('#play').textContent='▶');
+function fmt(s){if(!Number.isFinite(s))return'0:00';return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0')}
+audio.addEventListener('loadedmetadata',()=>$('#duration').textContent=fmt(audio.duration));
+audio.addEventListener('timeupdate',()=>{if(Number.isFinite(audio.duration)){ $('#seek').value=audio.currentTime/audio.duration*100;$('#currentTime').textContent=fmt(audio.currentTime);$('#duration').textContent=fmt(audio.duration)}});
+$('#seek').addEventListener('input',e=>{if(Number.isFinite(audio.duration))audio.currentTime=Number(e.target.value)/100*audio.duration});
+audio.addEventListener('ended',()=>{if(!repeatOn)nextTrack(1)});
+renderContent();
+</script>
+</body>
+</html>
